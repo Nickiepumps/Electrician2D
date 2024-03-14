@@ -7,15 +7,20 @@ using TMPro;
 public class RotateObject : MonoBehaviour
 {
     public GameObject Front, Side, Back;
-    private void Start()
+    public GameObject inspectNext,inspectPrev;
+    public void StartInpect()
+    {
+        inspectNext.SetActive(true);
+        inspectPrev.SetActive(true);
+        Front.SetActive(true);
+    }
+    public void StopInspect()
     {
         Front.SetActive(false);
         Side.SetActive(false);
         Back.SetActive(false);
-    }
-    public void StartInpect()
-    {
-        Front.SetActive(true);
+        inspectNext.SetActive(false);
+        inspectPrev.SetActive(false);
     }
     public void NextView()
     {
