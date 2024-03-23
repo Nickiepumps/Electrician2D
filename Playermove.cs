@@ -5,6 +5,7 @@ using UnityEngine;
 public class Playermove : MonoBehaviour
 {
     private Rigidbody2D rb;
+    public Sprite playerFront, playerBack, playerLeft, playerRight; // PlayerSprite 
     [SerializeField] private float movespeed;
     private float moveH, moveV;
     void Start()
@@ -14,8 +15,24 @@ public class Playermove : MonoBehaviour
 
     void Update()
     {
-        moveH = Input.GetAxis("Horizontal") * movespeed;
-        moveV = Input.GetAxis("Vertical") * movespeed;
+        moveH = Input.GetAxisRaw("Horizontal") * movespeed;
+        moveV = Input.GetAxisRaw("Vertical") * movespeed;
+        if(Input.GetAxisRaw("Horizontal") == 1)
+        {
+            GetComponent<SpriteRenderer>().sprite = playerRight;
+        }
+        if (Input.GetAxisRaw("Horizontal") == -1)
+        {
+            GetComponent<SpriteRenderer>().sprite = playerLeft;
+        }
+        if (Input.GetAxisRaw("Vertical") == 1)
+        {
+            GetComponent<SpriteRenderer>().sprite = playerBack;
+        }
+        if (Input.GetAxisRaw("Vertical") == -1)
+        {
+            GetComponent<SpriteRenderer>().sprite = playerFront;
+        }
     }
 
     private void FixedUpdate()
