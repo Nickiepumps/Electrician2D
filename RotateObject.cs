@@ -1,66 +1,79 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
 public class RotateObject : MonoBehaviour
 {
-    public GameObject Front, Side, Back;
-    public GameObject inspectNext,inspectPrev;
-    public void StartInpect()
+    public GameObject[] insideView; // Inside View Empty GameObject that contain image and slot
+    public GameObject[] outsideView; // Outside View Empty GameObject
+    private int insideCurrent = 0; // Inside Current Page Number
+    private int outsideCurrent = 0; // Outide Current Page Number
+    public void StartInpect(GameObject inspectButton)
     {
-        inspectNext.SetActive(true);
-        inspectPrev.SetActive(true);
-        Front.SetActive(true);
+        inspectButton.SetActive(true);
     }
-    public void StopInspect()
+    public void StopInspect(GameObject inspectButton)
     {
-        Front.SetActive(false);
-        Side.SetActive(false);
-        Back.SetActive(false);
-        inspectNext.SetActive(false);
-        inspectPrev.SetActive(false);
+        inspectButton.SetActive(false);
     }
-    public void NextView()
+    public void InsideNextView()
     {
-        if (Front.activeSelf)
-        {
-            Side.SetActive(true);
-            Front.SetActive(false);
+        insideCurrent++;
+        if (insideCurrent < insideView.Length)
+        {   
+            insideView[insideCurrent - 1].gameObject.SetActive(false);
+            insideView[insideCurrent].gameObject.SetActive(true);
         }
-        else if (Side.activeSelf)
+        if(insideCurrent == insideView.Length)
         {
-            Back.SetActive(true);
-            Front.SetActive(false);
-            Side.SetActive(false);
-        }
-        else if (Back.activeSelf)
-        {
-            Front.SetActive(true);
-            Side.SetActive(false);
-            Back.SetActive(false);
+            insideCurrent = 0;
+            insideView[insideView.Length - 1].gameObject.SetActive(false);
+            insideView[insideCurrent].gameObject.SetActive(true);
         }
     }
-    public void Previous()
+    public void InsidePreviousView()
     {
-        if (Front.activeSelf)
+        insideCurrent--;
+        if (insideCurrent < 0)
         {
-            Front.SetActive(false);
-            Side.SetActive(false);
-            Back.SetActive(true);
+            insideCurrent = insideView.Length - 1;
+            insideView[0].gameObject.SetActive(false);
+            insideView[insideCurrent].gameObject.SetActive(true);
         }
-        else if (Back.activeSelf)
+        else
         {
-            Front.SetActive(false);
-            Side.SetActive(true);
-            Back.SetActive(false);
+            insideView[insideCurrent + 1].gameObject.SetActive(false);
+            insideView[insideCurrent].gameObject.SetActive(true);
         }
-        else if (Side.activeSelf)
+    }
+    public void OutsidePreviousView()
+    {
+        outsideCurrent--;
+        if (outsideCurrent < 0)
         {
-            Front.SetActive(true);
-            Side.SetActive(false);
-            Back.SetActive(false);
+            outsideCurrent = outsideView.Length - 1;
+            outsideView[0].gameObject.SetActive(false);
+            outsideView[outsideCurrent].gameObject.SetActive(true);
+        }
+        else
+        {
+            outsideView[outsideCurrent + 1].gameObject.SetActive(false);
+            outsideView[outsideCurrent].gameObject.SetActive(true);
+        }
+    }
+    public void OutsidesideNextView()
+    {
+        outsideCurrent++;
+        if (outsideCurrent < outsideView.Length)
+        {
+            outsideView[outsideCurrent - 1].gameObject.SetActive(false);
+            outsideView[outsideCurrent].gameObject.SetActive(true);
+        }
+        if (outsideCurrent == outsideView.Length)
+        {
+            outsideCurrent = 0;
+            outsideView[outsideView.Length - 1].gameObject.SetActive(false);
+            outsideView[outsideCurrent].gameObject.SetActive(true);
         }
     }
 }
