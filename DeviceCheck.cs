@@ -4,40 +4,39 @@ using UnityEngine;
 
 public class DeviceCheck : MonoBehaviour
 {
-    public GameObject measurementIndicatorPrefab; // โมเดลของตัวเครื่องวัด
-    private GameObject currentMeasurementIndicator; // ตัวเครื่องวัดที่ถูกสร้างขึ้น
+    public GameObject measurementIndicatorPrefab; // Prefab for the measurement indicator
+    private GameObject currentMeasurementIndicator; // The current measurement indicator object
 
-    // ทำการตรวจจับการคลิกเมาส์
+    // Update is called once per frame
     void Update()
     {
-        // ตรวจสอบว่ามีการคลิกที่ตัวเครื่องวัดหรือไม่
+        // Check for mouse click
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             if (hit.collider != null && hit.collider.CompareTag("MeasurementDevice"))
             {
-                // สร้างตัวเครื่องวัดที่ถูกกดมาแสดงบนเมาส์
+                // Instantiate the measurement indicator at the clicked position
                 currentMeasurementIndicator = Instantiate(measurementIndicatorPrefab, hit.collider.transform.position, Quaternion.identity);
             }
         }
     }
 
-    // ตรวจสอบค่าของช่องวัดของอุปกรณ์อิเล็ก
+    // Called when another collider enters this object's trigger collider
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("ElectricalDevice"))
         {
             ElectricalDevice device = other.GetComponent<ElectricalDevice>();
 
-            //เอาไว้เสร้างคลาสสำหรับอุปกรณ์อิเล็กทริก
-            //public class ElectricalDevice : MonoBehaviour
+            // Check the value of the electrical device and log the result
+            // public class ElectricalDevice : MonoBehaviour
             // {
-            // ค่าของอุปกรณ์ (0 หรือ 1)
-            // public int Value;
+            //     // Value of the device (0 or 1)
+            //     // public int Value;
             // }
 
-
-        if (device != null)
+            if (device != null)
             {
                 if (device.Value == 0)
                 {
