@@ -39,7 +39,6 @@ public class Probe : MonoBehaviour, IPointerClickHandler
     }
     private void InstrumentPortClicking()
     {
-
         // Positive Port Clicking
         if (isPositivePort == true)
         {
@@ -207,5 +206,4 @@ public class Probe : MonoBehaviour, IPointerClickHandler
             Debug.Log("Click Instrument Port to Begin Checking");
         }
     }
-
 }

@@ -25,7 +25,7 @@ public class InstrumentManager : MonoBehaviour
     [SerializeField]
     private GameObject objectiveNote;
 
-    [HideInInspector]
+    //[HideInInspector]
     private bool checkSuccess;
     private int pID = 0;
     private int nID = 0;
@@ -42,12 +42,12 @@ public class InstrumentManager : MonoBehaviour
             {
                 ApplianceCheck();
             }
-            //Debug.Log("Check Successfully");
         }
         else
         {
             checkSuccess = false;
         }
+        CheckSlotComponentInside();
     }
     public void CancleComponentProbe()
     {
@@ -99,13 +99,29 @@ public class InstrumentManager : MonoBehaviour
     }
     public void ApplianceCheck()
     {
-        foreach (GameObject slotID in componentSlots)
+        foreach (GameObject inspectSlot in componentSlots)
         {
-            if (slotID.GetComponentInChildren<KeyItemSlot>().slotID == pID)
+            if (inspectSlot.GetComponentInChildren<KeyItemSlot>().slotID == pID)
             {
-                objectiveNote.GetComponent<ObjectiveNoteManager>().DisplayObjective(slotID);
+                objectiveNote.GetComponent<ObjectiveNoteManager>().DisplayObjective(inspectSlot);
             }
         }
         checkSuccess = true;
+    }
+    private void CheckSlotComponentInside()
+    {
+        foreach (var slot in componentSlots)
+        {
+            if (slot.transform.childCount == 0)
+            {
+                positiveSlotProbed = false;
+                negativeSlotProbed = false;
+                positivePortClicked = false;
+                negativePortClicked = false;
+                positiveChecked = false;
+                negativeChecked = false;
+                secondTime = false;
+            }
+        }
     }
 }
