@@ -1,0 +1,9 @@
+สร้าง image เป้นพื้นหลังชื่อ PopupWindow
+สร้าง Text ใส่ล่าง PopupWindow ชื่อ PopupText
+สร้างปุ่ม next ลงใน Canva > PopupWindow
+                       > next
+ใส่ Componant Animator ใน Canva
+ใส่ PopupAnimetion ใน Animator ใน Canva
+สร้าง Empty ครอบ Canva ชื่อ PopupWindow แล้วใส่ script Popup Window
+ใส่ PopupText ใน PopupWindow ในช่อง script PopupText
+ใส่ปุ่ม next ใน PopupWindow ในช่อง script Next Button
