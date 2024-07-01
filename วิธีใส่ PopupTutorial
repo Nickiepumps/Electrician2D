@@ -1,3 +1,5 @@
+---------File ที่ต้องใช้ อยู่ใน Popup package--------
+
 สร้าง image เป้นพื้นหลังชื่อ PopupWindow
 สร้าง Text ใส่ล่าง PopupWindow ชื่อ PopupText
 สร้างปุ่ม next ลงใน Canva > PopupWindow
