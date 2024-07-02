@@ -8,6 +8,9 @@ public class RotateObject : MonoBehaviour
     public GameObject[] outsideView; // Outside View Empty GameObject
     private int insideCurrent = 0; // Inside Current Page Number
     private int outsideCurrent = 0; // Outide Current Page Number
+
+    [Header("Multimeter GameObject")]
+    [SerializeField] private GameObject multimeter;
     public void StartInpect(GameObject inspectButton)
     {
         inspectButton.SetActive(true);
@@ -21,8 +24,18 @@ public class RotateObject : MonoBehaviour
         insideCurrent++;
         if (insideCurrent < insideView.Length)
         {   
+            // Change View
             insideView[insideCurrent - 1].gameObject.SetActive(false);
             insideView[insideCurrent].gameObject.SetActive(true);
+
+            // Reset Wire Probing
+            multimeter.GetComponent<InstrumentManager>().positiveSlotProbed = false;
+            multimeter.GetComponent<InstrumentManager>().negativeSlotProbed = false;
+            multimeter.GetComponent<InstrumentManager>().positivePortClicked = false;
+            multimeter.GetComponent<InstrumentManager>().negativePortClicked = false;
+            multimeter.GetComponent<InstrumentManager>().positiveChecked = false;
+            multimeter.GetComponent<InstrumentManager>().negativeChecked = false;
+            multimeter.GetComponent<InstrumentManager>().secondTime = false;
         }
         if(insideCurrent == insideView.Length)
         {
@@ -36,6 +49,7 @@ public class RotateObject : MonoBehaviour
         insideCurrent--;
         if (insideCurrent < 0)
         {
+            // Change View
             insideCurrent = insideView.Length - 1;
             insideView[0].gameObject.SetActive(false);
             insideView[insideCurrent].gameObject.SetActive(true);
@@ -44,6 +58,15 @@ public class RotateObject : MonoBehaviour
         {
             insideView[insideCurrent + 1].gameObject.SetActive(false);
             insideView[insideCurrent].gameObject.SetActive(true);
+
+            // Reset Wire Probing
+            multimeter.GetComponent<InstrumentManager>().positiveSlotProbed = false;
+            multimeter.GetComponent<InstrumentManager>().negativeSlotProbed = false;
+            multimeter.GetComponent<InstrumentManager>().positivePortClicked = false;
+            multimeter.GetComponent<InstrumentManager>().negativePortClicked = false;
+            multimeter.GetComponent<InstrumentManager>().positiveChecked = false;
+            multimeter.GetComponent<InstrumentManager>().negativeChecked = false;
+            multimeter.GetComponent<InstrumentManager>().secondTime = false;
         }
     }
     public void OutsidePreviousView()
@@ -51,6 +74,7 @@ public class RotateObject : MonoBehaviour
         outsideCurrent--;
         if (outsideCurrent < 0)
         {
+            // Change View
             outsideCurrent = outsideView.Length - 1;
             outsideView[0].gameObject.SetActive(false);
             outsideView[outsideCurrent].gameObject.SetActive(true);
