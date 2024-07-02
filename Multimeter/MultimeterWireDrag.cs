@@ -11,8 +11,8 @@ public class MultimeterWireDrag : MonoBehaviour
     public GameObject wireNegative = null;
 
     [Header("Port Position Offset")]
-    [SerializeField] private float offsetX;
-    [SerializeField] private float offsetY;
+    [SerializeField] private float offsetX; // Pivot pos of the wire
+    [SerializeField] private float offsetY; // Pivot pos of the wire
 
     private GameObject multimeter;
     private float wireAttachWidth;
@@ -27,7 +27,7 @@ public class MultimeterWireDrag : MonoBehaviour
         if (multimeter.GetComponent<InstrumentManager>().positivePortClicked == true && multimeter.GetComponent<InstrumentManager>().positiveChecked == false
             && wirePositive != null)
         {
-            wirePositive.gameObject.SetActive(true);
+            wirePositive.SetActive(true);
             DragWire(wirePositive);
             if (multimeter.GetComponent<InstrumentManager>().positiveChecked == true)
             {
@@ -37,7 +37,7 @@ public class MultimeterWireDrag : MonoBehaviour
         else if(multimeter.GetComponent<InstrumentManager>().negativePortClicked == true && multimeter.GetComponent<InstrumentManager>().negativeChecked == false
             && wireNegative != null)
         {
-            wireNegative.gameObject.SetActive(true);
+            wireNegative.SetActive(true);
             DragWire(wireNegative);
             if (multimeter.GetComponent<InstrumentManager>().negativeChecked == true)
             {
@@ -46,11 +46,11 @@ public class MultimeterWireDrag : MonoBehaviour
         }
         else if (multimeter.GetComponent<InstrumentManager>().positivePortClicked == false && wirePositive != null)
         {
-            wirePositive.gameObject.SetActive(false);
+            wirePositive.SetActive(false);
         }
         else if (multimeter.GetComponent<InstrumentManager>().negativePortClicked == false && wireNegative != null)
         {
-            wireNegative.gameObject.SetActive(false);
+            wireNegative.SetActive(false);
         }
     }
     public void DragWire(GameObject wire)

@@ -22,8 +22,7 @@ public class InstrumentManager : MonoBehaviour
     public bool positivePortClicked, negativePortClicked; // When Clicked +/- from the instrument
 
     [Header("Objective Note")]
-    [SerializeField]
-    private GameObject objectiveNote;
+    [SerializeField] private GameObject objectiveNote;
 
     //[HideInInspector]
     private bool checkSuccess;
@@ -41,6 +40,7 @@ public class InstrumentManager : MonoBehaviour
             if(checkSuccess == false)
             {
                 ApplianceCheck();
+                checkSuccess = true;
             }
         }
         else
@@ -70,7 +70,7 @@ public class InstrumentManager : MonoBehaviour
     {
         foreach (GameObject positive in compPositivePorts)
         {
-            if (positive.GetComponentInParent<Probe>().compPositiveProbed == true)
+            if (positive.GetComponent<Probe>().compPositiveProbed == true)
             {
                 pID = positive.GetComponent<Probe>().portID;
             }
@@ -80,7 +80,7 @@ public class InstrumentManager : MonoBehaviour
     {
         foreach (GameObject negative in compNegativePorts)
         {
-            if (negative.GetComponentInParent<Probe>().compNegativeProbed == true)
+            if (negative.GetComponent<Probe>().compNegativeProbed == true)
             {
                 nID = negative.GetComponent<Probe>().portID;
             }
@@ -106,13 +106,13 @@ public class InstrumentManager : MonoBehaviour
                 objectiveNote.GetComponent<ObjectiveNoteManager>().DisplayObjective(inspectSlot);
             }
         }
-        checkSuccess = true;
     }
     private void CheckSlotComponentInside()
     {
+        // Check if there is an object in the slot, if not, reset probing
         foreach (var slot in componentSlots)
         {
-            if (slot.transform.childCount == 0)
+            if (slot.transform.childCount == 0) // To DO: Fix Probing
             {
                 positiveSlotProbed = false;
                 negativeSlotProbed = false;
