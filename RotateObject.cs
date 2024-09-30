@@ -6,11 +6,11 @@ public class RotateObject : MonoBehaviour
 {
     public GameObject[] insideView; // Inside View Empty GameObject that contain image and slot
     public GameObject[] outsideView; // Outside View Empty GameObject
-    private int insideCurrent = 0; // Inside Current Page Number
-    private int outsideCurrent = 0; // Outide Current Page Number
+    private int insideCurrent = 0; // Inside Current View Number
+    private int outsideCurrent = 0; // Outide Current View Number
 
     [Header("Multimeter GameObject")]
-    [SerializeField] private GameObject multimeter;
+    [SerializeField] private GameObject multimeter; // Multimeter GameObject
     public void StartInpect(GameObject inspectButton)
     {
         inspectButton.SetActive(true);
@@ -21,14 +21,14 @@ public class RotateObject : MonoBehaviour
     }
     public void InsideNextView()
     {
-        insideCurrent++;
+        insideCurrent++; // Add current view number by 1
         if (insideCurrent < insideView.Length)
         {   
-            // Change View
+            // Change to next View
             insideView[insideCurrent - 1].gameObject.SetActive(false);
             insideView[insideCurrent].gameObject.SetActive(true);
 
-            // Reset Wire Probing
+            // Reset Wire Probing when changing the angle view
             multimeter.GetComponent<InstrumentManager>().positiveSlotProbed = false;
             multimeter.GetComponent<InstrumentManager>().negativeSlotProbed = false;
             multimeter.GetComponent<InstrumentManager>().positivePortClicked = false;
@@ -39,6 +39,7 @@ public class RotateObject : MonoBehaviour
         }
         if(insideCurrent == insideView.Length)
         {
+            // Switch to the first view in the first element of the array when the current view reaches the last element
             insideCurrent = 0;
             insideView[insideView.Length - 1].gameObject.SetActive(false);
             insideView[insideCurrent].gameObject.SetActive(true);
@@ -46,20 +47,21 @@ public class RotateObject : MonoBehaviour
     }
     public void InsidePreviousView()
     {
-        insideCurrent--;
+        insideCurrent--; // Decrease current view number by 1 
         if (insideCurrent < 0)
         {
-            // Change View
+            // Change view angle to the last element by set insideCurrent value to last element value
             insideCurrent = insideView.Length - 1;
             insideView[0].gameObject.SetActive(false);
             insideView[insideCurrent].gameObject.SetActive(true);
         }
         else
         {
+            //  Change to previous view by decrease insideCurrent value by 1 if current insideCurrent is not lesser than 0 
             insideView[insideCurrent + 1].gameObject.SetActive(false);
             insideView[insideCurrent].gameObject.SetActive(true);
 
-            // Reset Wire Probing
+            // Reset Wire Probing when changing the angle view
             multimeter.GetComponent<InstrumentManager>().positiveSlotProbed = false;
             multimeter.GetComponent<InstrumentManager>().negativeSlotProbed = false;
             multimeter.GetComponent<InstrumentManager>().positivePortClicked = false;
