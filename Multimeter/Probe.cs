@@ -7,7 +7,7 @@ public enum ProbeType
     componentProbe,
     instrumentProbe
 }
-public class Probe : MonoBehaviour, IPointerClickHandler
+public class Probe : MonoBehaviour, IPointerClickHandler,IDropHandler,IBeginDragHandler,IEndDragHandler
 {
     private GameObject multimeter; // Instrument Manager
     [Header("Probe Type")]
@@ -36,6 +36,48 @@ public class Probe : MonoBehaviour, IPointerClickHandler
         {
             ComponentPortClicking();
         }
+    }
+    public void OnDrop(PointerEventData eventData)
+    {
+        if (probetype == ProbeType.instrumentProbe)
+        {
+            InstrumentPortClicking();
+        }
+        if (probetype == ProbeType.componentProbe)
+        {
+            ComponentPortClicking();
+        }
+    }
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        if (probetype == ProbeType.instrumentProbe)
+        {
+            InstrumentPortClicking();
+        }
+        if (probetype == ProbeType.componentProbe)
+        {
+            ComponentPortClicking();
+        }
+    }
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        // Positive Port clicked but doesn't probe 
+        if (multimeter.GetComponent<InstrumentManager>().positivePortClicked == true
+            && multimeter.GetComponent<InstrumentManager>().isProbing == true
+            && multimeter.GetComponent<InstrumentManager>().positiveSlotProbed == false)
+        {
+            multimeter.GetComponent<InstrumentManager>().positivePortClicked = false;
+            multimeter.GetComponent<InstrumentManager>().isProbing = false;
+        }
+        // Negative Port clicked but doesn't probe
+        else if (multimeter.GetComponent<InstrumentManager>().negativePortClicked == true
+                 && multimeter.GetComponent<InstrumentManager>().isProbing == true
+                 && multimeter.GetComponent<InstrumentManager>().negativeSlotProbed == false)
+        {
+            multimeter.GetComponent<InstrumentManager>().negativePortClicked = false;
+            multimeter.GetComponent<InstrumentManager>().isProbing = false;
+        }
+
     }
     private void InstrumentPortClicking()
     {

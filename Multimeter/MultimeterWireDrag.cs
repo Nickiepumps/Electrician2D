@@ -62,14 +62,15 @@ public class MultimeterWireDrag : MonoBehaviour
         wire.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
         // Calculate Width of the object by using Mouse Position
-        float totalWidth = ((Input.mousePosition.x - offsetX) * (Input.mousePosition.x - offsetX)) + ((Input.mousePosition.y - offsetY) * (Input.mousePosition.y - offsetY));
-        float width = Mathf.Sqrt(totalWidth);
+        //float totalWidth = ((Input.mousePosition.x - offsetX) * (Input.mousePosition.x - offsetX)) + ((Input.mousePosition.y - offsetY) * (Input.mousePosition.y - offsetY));
+        Vector2 offset = new Vector2(offsetX, offsetY);
+        float width = Vector2.Distance(Input.mousePosition, offset);
         wireAttachWidth = width;
-        wire.GetComponent<RectTransform>().sizeDelta = new Vector2(width, 19.79f);
+        wire.GetComponent<RectTransform>().sizeDelta = new Vector2(width, wire.GetComponent<RectTransform>().sizeDelta.y);
     }
     public void AttachWire(GameObject wire)
     {
         wire.transform.rotation = Quaternion.AngleAxis(wireAttachAngle, Vector3.forward);
-        wire.GetComponent<RectTransform>().sizeDelta = new Vector2(wireAttachWidth, 19.79f);
+        wire.GetComponent<RectTransform>().sizeDelta = new Vector2(wireAttachWidth, wire.GetComponent<RectTransform>().sizeDelta.y);
     }
 }
