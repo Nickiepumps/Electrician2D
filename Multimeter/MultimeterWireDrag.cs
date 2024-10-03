@@ -62,7 +62,6 @@ public class MultimeterWireDrag : MonoBehaviour
         wire.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
         // Calculate Width of the object by using Mouse Position
-        //float totalWidth = ((Input.mousePosition.x - offsetX) * (Input.mousePosition.x - offsetX)) + ((Input.mousePosition.y - offsetY) * (Input.mousePosition.y - offsetY));
         Vector2 offset = new Vector2(offsetX, offsetY);
         float width = Vector2.Distance(Input.mousePosition, offset);
         wireAttachWidth = width;
