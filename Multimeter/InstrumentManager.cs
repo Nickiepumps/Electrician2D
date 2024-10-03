@@ -16,7 +16,7 @@ public class InstrumentManager : MonoBehaviour
     public GameObject positivePort, negativePort; // Multimeter +/- Ports
 
     [Header("Component Probe Status")]
-    public bool positiveSlotProbed,negativeSlotProbed; // When Clicked on the "Probe slot" on the Electrical comp slot
+    public bool positiveSlotProbed, negativeSlotProbed; // When Clicked on the "Probe slot" on the Electrical comp slot
 
     [Header("Instrument Probe Status")]
     public bool positivePortClicked, negativePortClicked; // When Clicked +/- from the instrument
@@ -34,10 +34,10 @@ public class InstrumentManager : MonoBehaviour
     public bool positiveChecked, negativeChecked; // When both Comp and Instrument probed correctly
     private void Update()
     {
-        if(positiveChecked == true && negativeChecked == true)
+        if (positiveChecked == true && negativeChecked == true)
         {
             secondTime = false;
-            if(checkSuccess == false)
+            if (checkSuccess == false)
             {
                 ApplianceCheck();
                 checkSuccess = true;
@@ -47,22 +47,23 @@ public class InstrumentManager : MonoBehaviour
         {
             checkSuccess = false;
         }
-        CheckSlotComponentInside();
     }
     public void CancleComponentProbe()
     {
-        if(positivePortClicked == false)
+        if (positivePortClicked == false)
         {
             for (int i = 0; i < compPositivePorts.Length; i++)
             {
                 compPositivePorts[i].GetComponent<Probe>().compPositiveProbed = false;
+                pID = 0;
             }
         }
-        if(negativePortClicked == false)
+        if (negativePortClicked == false)
         {
             for (int i = 0; i < compNegativePorts.Length; i++)
             {
                 compNegativePorts[i].GetComponent<Probe>().compNegativeProbed = false;
+                nID = 0;
             }
         }
     }
@@ -88,7 +89,8 @@ public class InstrumentManager : MonoBehaviour
     }
     public bool CompCheckSlot()
     {
-        if(pID == nID || secondTime == false) // User Probe the correct slot if PositiveIDSlot and NegativeIDSlot has the same ID
+        // To Do: Fix Component can probe on different component probe slot issue
+        if (pID == nID || secondTime == false) // User Probe the correct slot if PositiveIDSlot and NegativeIDSlot has the same ID
         {
             return true;
         }
@@ -103,24 +105,8 @@ public class InstrumentManager : MonoBehaviour
         {
             if (inspectSlot.GetComponentInChildren<KeyItemSlot>().slotID == pID)
             {
-                objectiveNote.GetComponent<ObjectiveNoteManager>().DisplayObjective(inspectSlot);
-            }
-        }
-    }
-    private void CheckSlotComponentInside()
-    {
-        // Check if there is an object in the slot, if not, reset probing
-        foreach (var slot in componentSlots)
-        {
-            if (slot.transform.childCount == 0) // To DO: Fix Probing
-            {
-                positiveSlotProbed = false;
-                negativeSlotProbed = false;
-                positivePortClicked = false;
-                negativePortClicked = false;
-                positiveChecked = false;
-                negativeChecked = false;
-                secondTime = false;
+                // To Do: Uncomment this if new objective display is not working
+                //objectiveNote.GetComponent<ObjectiveNoteManager>().CheckObjectiveStatus(inspectSlot);
             }
         }
     }
