@@ -7,8 +7,8 @@ using UnityEngine.EventSystems;
 public class MultimeterWireDrag : MonoBehaviour
 {
     [Header("Wire Object")]
-    public GameObject wirePositive = null;
-    public GameObject wireNegative = null;
+    public GameObject wirePositive;
+    public GameObject wireNegative;
 
     [Header("Port Position Offset")]
     [SerializeField] private float offsetX; // Pivot pos of the wire
