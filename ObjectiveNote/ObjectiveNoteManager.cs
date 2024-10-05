@@ -84,7 +84,7 @@ public class ObjectiveNoteManager : MonoBehaviour
         {
             if (inspectSlot.GetComponentInChildren<KeyItemSlot>().slotType.electronicPart.condition == PartCondition.Broken)
             {
-                // Check if there any objective matched the current slot 
+                // Check if there is any objective matched the current slot 
                 // Update Objective Color Status
                 foreach (GameObject obj in objectiveDictionary.Values)
                 {
@@ -92,18 +92,30 @@ public class ObjectiveNoteManager : MonoBehaviour
                         && multimeter.GetComponent<InstrumentManager>().positiveChecked == true
                         && multimeter.GetComponent<InstrumentManager>().negativeChecked == true)
                     {
-                        Debug.Log("Test");
                         obj.GetComponentInChildren<Image>().color = Color.red;
+                    }
+                    else if (objectiveDictionary.ContainsKey(inspectSlot.GetComponentInChildren<KeyItemSlot>().slotID)
+                        && inspectSlot.GetComponentInChildren<KeyItemSlot>().isFixed == true)
+                    {
+                        obj.GetComponentInChildren<Image>().color = Color.green;
                     }
                 }
             }
-            else if(inspectSlot.GetComponentInChildren<KeyItemSlot>().slotType.electronicPart.condition == PartCondition.NearlyBroke)
+            else if (inspectSlot.GetComponentInChildren<KeyItemSlot>().slotType.electronicPart.condition == PartCondition.Normal)
             {
-                if(CheckObjective(inspectSlot.GetComponentInChildren<KeyItemSlot>().slotID) == false)
+                // Check if there is any objective matched the current slot 
+                // Update Objective Color Status
+                foreach (GameObject obj in objectiveDictionary.Values)
                 {
-                    //nearCap.GetComponentInChildren<Image>().color = new Color(224, 152, 0, 255);
+                    if (objectiveDictionary.ContainsKey(inspectSlot.GetComponentInChildren<KeyItemSlot>().slotID)
+                        && multimeter.GetComponent<InstrumentManager>().positiveChecked == true
+                        && multimeter.GetComponent<InstrumentManager>().negativeChecked == true)
+                    {
+                        obj.GetComponentInChildren<Image>().color = Color.green;
+                    }
                 }
             }
+
         }
         #endregion
         #region Thermostat
@@ -111,22 +123,21 @@ public class ObjectiveNoteManager : MonoBehaviour
         {
             if (inspectSlot.GetComponentInChildren<KeyItemSlot>().slotType.electronicPart.condition == PartCondition.Broken)
             {
-                if(CheckObjective(inspectSlot.GetComponentInChildren<KeyItemSlot>().slotID) == false)
+                // Check if there is any objective matched the current slot 
+                // Update Objective Color Status
+                foreach (GameObject obj in objectiveDictionary.Values)
                 {
-                    GameObject brkThrmst = Instantiate(objectivePrefab, transform);
-                    brkThrmst.GetComponentInChildren<TMP_Text>().text = inspectSlot.GetComponentInChildren<KeyItemSlot>().slotType.electronicPart.electronicType.ToString();
-                    brkThrmst.GetComponentInChildren<Image>().color = Color.red;
-                    objectiveDictionary.Add(inspectSlot.GetComponentInChildren<KeyItemSlot>().slotID, brkThrmst);
-                } 
-            }
-            else if (inspectSlot.GetComponentInChildren<KeyItemSlot>().slotType.electronicPart.condition == PartCondition.NearlyBroke)
-            {
-                if(CheckObjective(inspectSlot.GetComponentInChildren<KeyItemSlot>().slotID) == false)
-                {
-                    GameObject nearThrmst = Instantiate(objectivePrefab, transform);
-                    nearThrmst.GetComponentInChildren<TMP_Text>().text = inspectSlot.GetComponentInChildren<KeyItemSlot>().slotType.electronicPart.electronicType.ToString();
-                    nearThrmst.GetComponentInChildren<Image>().color = new Color(224, 152, 0, 255);
-                    objectiveDictionary.Add(inspectSlot.GetComponentInChildren<KeyItemSlot>().slotID, nearThrmst);
+                    if (objectiveDictionary.ContainsKey(inspectSlot.GetComponentInChildren<KeyItemSlot>().slotID)
+                        && multimeter.GetComponent<InstrumentManager>().positiveChecked == true
+                        && multimeter.GetComponent<InstrumentManager>().negativeChecked == true)
+                    {
+                        obj.GetComponentInChildren<Image>().color = Color.red;
+                    }
+                    else if (objectiveDictionary.ContainsKey(inspectSlot.GetComponentInChildren<KeyItemSlot>().slotID)
+                        && inspectSlot.GetComponentInChildren<KeyItemSlot>().isFixed == true)
+                    {
+                        obj.GetComponentInChildren<Image>().color = Color.green;
+                    }
                 }
             }
         }
@@ -136,12 +147,21 @@ public class ObjectiveNoteManager : MonoBehaviour
         {
             if (inspectSlot.GetComponentInChildren<KeyItemSlot>().slotType.electronicPart.condition == PartCondition.NeedResoldering)
             {
-                if(CheckObjective(inspectSlot.GetComponentInChildren<KeyItemSlot>().slotID) == false)
+                // Check if there is any objective matched the current slot 
+                // Update Objective Color Status
+                foreach (GameObject obj in objectiveDictionary.Values)
                 {
-                    GameObject RS_Fanswitch_H = Instantiate(objectivePrefab, transform);
-                    RS_Fanswitch_H.GetComponentInChildren<TMP_Text>().text = "High Switch";
-                    RS_Fanswitch_H.GetComponentInChildren<Image>().color = Color.red;
-                    objectiveDictionary.Add(inspectSlot.GetComponentInChildren<KeyItemSlot>().slotID, RS_Fanswitch_H);
+                    if (objectiveDictionary.ContainsKey(inspectSlot.GetComponentInChildren<KeyItemSlot>().slotID)
+                        && multimeter.GetComponent<InstrumentManager>().positiveChecked == true
+                        && multimeter.GetComponent<InstrumentManager>().negativeChecked == true)
+                    {
+                        obj.GetComponentInChildren<Image>().color = Color.red;
+                    }
+                    else if (objectiveDictionary.ContainsKey(inspectSlot.GetComponentInChildren<KeyItemSlot>().slotID)
+                        && inspectSlot.GetComponentInChildren<KeyItemSlot>().isFixed == true)
+                    {
+                        obj.GetComponentInChildren<Image>().color = Color.green;
+                    }
                 }
             }
         }
@@ -149,12 +169,21 @@ public class ObjectiveNoteManager : MonoBehaviour
         {
             if (inspectSlot.GetComponentInChildren<KeyItemSlot>().slotType.electronicPart.condition == PartCondition.NeedResoldering)
             {
-                if(CheckObjective(inspectSlot.GetComponentInChildren<KeyItemSlot>().slotID) == false)
+                // Check if there is any objective matched the current slot 
+                // Update Objective Color Status
+                foreach (GameObject obj in objectiveDictionary.Values)
                 {
-                    GameObject RS_Fanswitch_M = Instantiate(objectivePrefab, transform);
-                    RS_Fanswitch_M.GetComponentInChildren<TMP_Text>().text = "Medium Switch";
-                    RS_Fanswitch_M.GetComponentInChildren<Image>().color = Color.red;
-                    objectiveDictionary.Add(inspectSlot.GetComponentInChildren<KeyItemSlot>().slotID, RS_Fanswitch_M);
+                    if (objectiveDictionary.ContainsKey(inspectSlot.GetComponentInChildren<KeyItemSlot>().slotID)
+                        && multimeter.GetComponent<InstrumentManager>().positiveChecked == true
+                        && multimeter.GetComponent<InstrumentManager>().negativeChecked == true)
+                    {
+                        obj.GetComponentInChildren<Image>().color = Color.red;
+                    }
+                    else if (objectiveDictionary.ContainsKey(inspectSlot.GetComponentInChildren<KeyItemSlot>().slotID)
+                        && inspectSlot.GetComponentInChildren<KeyItemSlot>().isFixed == true)
+                    {
+                        obj.GetComponentInChildren<Image>().color = Color.green;
+                    }
                 }
             }
         }
@@ -162,12 +191,21 @@ public class ObjectiveNoteManager : MonoBehaviour
         {
             if (inspectSlot.GetComponentInChildren<KeyItemSlot>().slotType.electronicPart.condition == PartCondition.NeedResoldering)
             {
-                if(CheckObjective(inspectSlot.GetComponentInChildren<KeyItemSlot>().slotID) == false)
+                // Check if there is any objective matched the current slot 
+                // Update Objective Color Status
+                foreach (GameObject obj in objectiveDictionary.Values)
                 {
-                    GameObject RS_Fanswitch_L = Instantiate(objectivePrefab, transform);
-                    RS_Fanswitch_L.GetComponentInChildren<TMP_Text>().text = "Low Switch";
-                    RS_Fanswitch_L.GetComponentInChildren<Image>().color = Color.red;
-                    objectiveDictionary.Add(inspectSlot.GetComponentInChildren<KeyItemSlot>().slotID, RS_Fanswitch_L);
+                    if (objectiveDictionary.ContainsKey(inspectSlot.GetComponentInChildren<KeyItemSlot>().slotID)
+                        && multimeter.GetComponent<InstrumentManager>().positiveChecked == true
+                        && multimeter.GetComponent<InstrumentManager>().negativeChecked == true)
+                    {
+                        obj.GetComponentInChildren<Image>().color = Color.red;
+                    }
+                    else if (objectiveDictionary.ContainsKey(inspectSlot.GetComponentInChildren<KeyItemSlot>().slotID)
+                        && inspectSlot.GetComponentInChildren<KeyItemSlot>().isFixed == true)
+                    {
+                        obj.GetComponentInChildren<Image>().color = Color.green;
+                    }
                 }
             }
         }
@@ -175,12 +213,21 @@ public class ObjectiveNoteManager : MonoBehaviour
         {
             if (inspectSlot.GetComponentInChildren<KeyItemSlot>().slotType.electronicPart.condition == PartCondition.NeedResoldering)
             {
-                if(CheckObjective(inspectSlot.GetComponentInChildren<KeyItemSlot>().slotID) == false)
+                // Check if there is any objective matched the current slot 
+                // Update Objective Color Status
+                foreach (GameObject obj in objectiveDictionary.Values)
                 {
-                    GameObject RS_Fanswitch_N = Instantiate(objectivePrefab, transform);
-                    RS_Fanswitch_N.GetComponentInChildren<TMP_Text>().text = "Neutron Wire";
-                    RS_Fanswitch_N.GetComponentInChildren<Image>().color = Color.red;
-                    objectiveDictionary.Add(inspectSlot.GetComponentInChildren<KeyItemSlot>().slotID, RS_Fanswitch_N);
+                    if (objectiveDictionary.ContainsKey(inspectSlot.GetComponentInChildren<KeyItemSlot>().slotID)
+                        && multimeter.GetComponent<InstrumentManager>().positiveChecked == true
+                        && multimeter.GetComponent<InstrumentManager>().negativeChecked == true)
+                    {
+                        obj.GetComponentInChildren<Image>().color = Color.red;
+                    }
+                    else if (objectiveDictionary.ContainsKey(inspectSlot.GetComponentInChildren<KeyItemSlot>().slotID)
+                        && inspectSlot.GetComponentInChildren<KeyItemSlot>().isFixed == true)
+                    {
+                        obj.GetComponentInChildren<Image>().color = Color.green;
+                    }
                 }
             }
         }
@@ -188,7 +235,7 @@ public class ObjectiveNoteManager : MonoBehaviour
     }
 
     // Update Objective using fixing status in the Component slot that assigned into
-    public void UpdateObjective(GameObject inspectSlot)
+    /*public void UpdateObjective(GameObject inspectSlot)
     {
         if (inspectSlot.GetComponentInChildren<KeyItemSlot>().isFixed == true)
         {
@@ -204,10 +251,10 @@ public class ObjectiveNoteManager : MonoBehaviour
                 objectiveDictionary[inspectSlot.GetComponentInChildren<KeyItemSlot>().slotID].transform.GetChild(0).gameObject.GetComponent<Image>().color = Color.red;
             }
         }
-    }
+    }*/
 
     // Check Objective in objectiveDictionary to prevent any infinite instantiation
-    private bool CheckObjective(int component)
+    /*private bool CheckObjective(int component)
     {
         if (objectiveDictionary.ContainsKey(component))
         {
@@ -217,5 +264,5 @@ public class ObjectiveNoteManager : MonoBehaviour
         {
             return false;
         }
-    }
+    }*/
 }
