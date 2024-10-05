@@ -233,36 +233,4 @@ public class ObjectiveNoteManager : MonoBehaviour
         }
         #endregion
     }
-
-    // Update Objective using fixing status in the Component slot that assigned into
-    /*public void UpdateObjective(GameObject inspectSlot)
-    {
-        if (inspectSlot.GetComponentInChildren<KeyItemSlot>().isFixed == true)
-        {
-            if (objectiveDictionary.ContainsKey(inspectSlot.GetComponentInChildren<KeyItemSlot>().slotID))
-            {
-                objectiveDictionary[inspectSlot.GetComponentInChildren<KeyItemSlot>().slotID].transform.GetChild(0).gameObject.GetComponent<Image>().color = Color.green;
-            }
-        }
-        else if (inspectSlot.GetComponentInChildren<KeyItemSlot>().isFixed == false)
-        {
-            if (objectiveDictionary.ContainsKey(inspectSlot.GetComponentInChildren<KeyItemSlot>().slotID))
-            {
-                objectiveDictionary[inspectSlot.GetComponentInChildren<KeyItemSlot>().slotID].transform.GetChild(0).gameObject.GetComponent<Image>().color = Color.red;
-            }
-        }
-    }*/
-
-    // Check Objective in objectiveDictionary to prevent any infinite instantiation
-    /*private bool CheckObjective(int component)
-    {
-        if (objectiveDictionary.ContainsKey(component))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }*/
 }
