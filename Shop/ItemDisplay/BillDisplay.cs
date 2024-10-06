@@ -12,7 +12,6 @@ public class BillDisplay : MonoBehaviour
     [SerializeField] private TMP_Text itemAmountText;
     public int itemAmount;
 
-    //[HideInInspector]
     public int itemTotalPrice;
 
     private void Start()
