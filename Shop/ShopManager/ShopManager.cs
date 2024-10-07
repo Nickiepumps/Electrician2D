@@ -269,8 +269,6 @@ public class ShopManager : MonoBehaviour
             shopDictionary.Clear();
 
             billWindow.SetActive(true);
-
-            // To Do: Display Total Price value
             billWindow.transform.Find("BG_Bill/TotalCredit/TotalCreditValue").GetComponent<TMP_Text>().text = totalPrice.ToString();
             billWindow.transform.Find("BG_Bill/TotalCredit/TotalCreditValue2").GetComponent<TMP_Text>().text = totalPrice.ToString();
         }
