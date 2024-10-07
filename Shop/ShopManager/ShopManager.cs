@@ -248,7 +248,7 @@ public class ShopManager : MonoBehaviour
                     PackageSlotCheck(purchasedItem);
                 }
             }
-            // Create bill display item in billDisplay
+            // Create bill display item in billDisplay, clear cart display slot, shopDictionary, and cartItemDisplayList
             foreach(GameObject cartItem in cartItemDisplaysList)
             {
                 GameObject billItem = Instantiate(billItemDisplayPrefab); // Create billItemDisplay gameObject 
@@ -258,13 +258,9 @@ public class ShopManager : MonoBehaviour
                 billItem.GetComponent<BillDisplay>().component = cartItem.GetComponent<ItemDisplay>().component;
                 billItem.GetComponent<BillDisplay>().itemAmount = cartItem.GetComponent<ItemDisplay>().itemAmount;
                 billItem.GetComponent<BillDisplay>().itemTotalPrice = cartItem.GetComponent<ItemDisplay>().itemTotalPrice;
-            }
-
-            // Clear cart display slot, shopDictionary and cartItemDisplayList
-            foreach (GameObject cartItem in cartItemDisplaysList)
-            {
                 Destroy(cartItem);
             }
+
             cartItemDisplaysList.Clear();
             shopDictionary.Clear();
 
