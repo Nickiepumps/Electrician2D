@@ -10,8 +10,8 @@ public class PackageManager : MonoBehaviour, IDataPersistance, ISlotDataPersista
     public List<GameObject> packageSlots; // Package Slots
     public GameObject packageBox; // PackageBox
 
-    [Header("Package Item Prefab for Save System")]
-    public GameObject loadPackageItemPrefeb; // Package Item Prefab for Save System
+    //[Header("Package Item Prefab for Save System")]
+    //public GameObject loadPackageItemPrefeb; // Package Item Prefab for Save System
 
     public void OpenPackage(GameObject package)
     {
