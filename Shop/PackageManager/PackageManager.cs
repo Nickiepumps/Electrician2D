@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PackageManager : MonoBehaviour, IDataPersistance, ISlotDataPersistance
 {
-    private List<GameObject> createdPackageList = new List<GameObject>();
+    //private List<GameObject> createdPackageList = new List<GameObject>();
     //public List<ElectronicPart> componentsList; 
 
     public List<GameObject> packageSlots; // Package Slots
