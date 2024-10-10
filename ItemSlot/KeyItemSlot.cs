@@ -27,10 +27,7 @@ public class KeyItemSlot : MonoBehaviour, IDropHandler
     {
         GameObject droppedItem = eventData.pointerDrag; // Create droppedItem GameObject by using Image that being dragged 
         DragableItem draggableItem = droppedItem.GetComponent<DragableItem>(); // To Do: Find other Design pattern solution to de-coupled. Maybe use Observer?
-        if (draggableItem.part.condition == slotType.electronicPart.condition) // Check Electronic Condition
-        {
-            Debug.Log("Electronic Part is Broken,Find a new Part");
-        }
+        
         if (draggableItem.part.electronicType == slotType.electronicPart.electronicType
             && transform.childCount == 0 && draggableItem.part.condition != PartCondition.Broken) // Check Electronic part type of draggableItem. If it has same type as slot's Electronic part type and not broken 
         {
